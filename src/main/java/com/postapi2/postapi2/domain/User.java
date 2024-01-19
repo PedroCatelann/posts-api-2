@@ -7,6 +7,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Entity
@@ -26,6 +27,10 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "author")
     private List<Post> postList = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Coment> comentList = new ArrayList<>();
+
     public User(){}
 
     public User(Long id, String name, String email) {
@@ -36,5 +41,46 @@ public class User implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Post> getPostList() {
+        return postList;
+    }
+
+    public List<Coment> getComentList() {
+        return comentList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

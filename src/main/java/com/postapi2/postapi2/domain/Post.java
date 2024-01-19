@@ -1,8 +1,12 @@
 package com.postapi2.postapi2.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +21,10 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User author;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "post")
+    private List<Coment> comentList = new ArrayList<>();
+
     public Post() {
     }
 
@@ -66,6 +74,10 @@ public class Post {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public List<Coment> getComentList() {
+        return comentList;
     }
 
     @Override

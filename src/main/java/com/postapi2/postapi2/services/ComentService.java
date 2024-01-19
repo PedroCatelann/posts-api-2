@@ -1,29 +1,24 @@
 package com.postapi2.postapi2.services;
 
+import com.postapi2.postapi2.domain.Coment;
 import com.postapi2.postapi2.domain.Post;
+import com.postapi2.postapi2.repositories.ComentRepository;
 import com.postapi2.postapi2.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class PostService {
+public class ComentService {
     @Autowired
-    private PostRepository repository;
+    private ComentRepository repository;
 
-    public List<Post> findAll() {
+    public List<Coment> findAll() {
 
         return repository.findAll();
     }
-    public Post insert(Post obj) {
+    public Coment insert(Coment obj) {
         return repository.save(obj);
-    }
-
-    public Post findById(Long id) throws Exception {
-        Optional<Post> obj = repository.findById(id);
-
-        return obj.orElseThrow(() -> new Exception("Falha ao encontrar o id: " + id));
     }
 }
