@@ -45,4 +45,17 @@ public class ComentController {
 
         return ResponseEntity.created(uri).body(obj);
     }
+
+    @PutMapping(value = "/{id}")
+    private ResponseEntity<Coment> update (@PathVariable Long id, @RequestBody Coment obj) {
+        obj = service.update(id, obj);
+
+        return ResponseEntity.ok().body(obj);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    private ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

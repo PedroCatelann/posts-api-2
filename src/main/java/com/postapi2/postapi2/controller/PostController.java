@@ -32,4 +32,17 @@ public class PostController {
         return ResponseEntity.created(uri).body(obj);
     }
 
+    @PutMapping(value = "/{id}")
+    private ResponseEntity<Post> update (@PathVariable Long id, @RequestBody Post obj) {
+        obj = service.update(id, obj);
+
+        return ResponseEntity.ok().body(obj);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    private ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
